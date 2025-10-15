@@ -1,0 +1,58 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+.signup_page {
+  @include flex_center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+
+  background-color: $background-color-primary-light-theme;
+  color: $text-color-primary-light-theme;
+
+  form {
+    @include flex_center;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 50%;
+
+    background-color: $background-color-secondary-light-theme;
+
+    padding: 20px 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+  }
+
+  .form_title {
+    font-size: $font-size-large; // 32px
+  }
+
+  .login_label,
+  .password_label {
+    width: 50%;
+
+    overflow: hidden;
+
+    border: 2px solid $text-color-primary-light-theme;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    gap: 10px;
+    padding: 10px;
+
+    input {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: $text-color-primary-light-theme;
+      font-size: $font-size-small; // 18px
+      width: 60%;
+    }
+  }
+
+  .btn {
+    @include btn_style_primary;
+  }
+}

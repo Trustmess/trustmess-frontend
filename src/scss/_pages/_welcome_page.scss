@@ -1,0 +1,36 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.welcome_page {
+  @include flex_center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+
+  background-color: $background-color-primary-light-theme;
+  color: $text-color-primary-light-theme;
+
+  .welcome_page_container {
+    @include flex_center;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 50%;
+
+    background-color: $background-color-secondary-light-theme;
+
+    padding: 20px 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+
+    .welcome_page_title {
+      font-size: $font-size-large;
+      width: 50%;
+      text-align: center;
+    }
+
+    .btn {
+      @include btn_style_primary;
+    }
+  }
+}

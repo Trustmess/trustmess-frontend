@@ -1,0 +1,24 @@
+@use "variables" as *;
+
+@mixin flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin btn_style_primary {
+  background-color: $button-background-color-light-theme;
+  color: $button-text-color-light-theme;
+
+  font-size: $font-size-small; // 18px
+  width: 50%;
+
+  padding: 10px 15px;
+  border-radius: 10px;
+
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: darken($button-background-color-light-theme, 10%);
+    cursor: pointer;
+  }
+}
