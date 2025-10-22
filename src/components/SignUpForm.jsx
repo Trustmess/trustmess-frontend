@@ -1,7 +1,11 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './Button';
 // Import formik & YUP (for validation)
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+// Import APIs
+import { createUser } from '/src/api/requests';
 
 // Validation form
 const signupSchema = Yup.object({
@@ -18,32 +22,38 @@ const signupSchema = Yup.object({
     .required('Confirm password'),
 });
 
-// Submit form
-const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
-  try {
-    console.log('Sign Up values:', values);
-
-    // API Request
-    // POST reques
-    // End API Request
-
-    // Simulation delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    // Tepmorary
-    alert(`Account was created! Your login: ${values.username}, your password: ${values.password}`);
-
-    // Clear form after successfull registration
-    resetForm();
-  } catch (error) {
-    setErrors({ submit: 'Sign Up error. Try other login' });
-  } finally {
-    // Alwais on end
-    setSubmitting(false);
-  }
-};
-
 export const SignUpForm = () => {
+  // Routing
+  const navigate = useNavigate();
+  // loading state
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Submit form
+  const handleSubmit = async (values, { setSubmitting, setErrors, resetForm }) => {
+    console.log('Sign Up values before sending:', values);
+    setIsLoading(true);
+    try {
+      // API Request
+      const newUser = await createUser(values);
+      console.log('User successfully created');
+      // Tepmorary
+      alert(
+        `Account was created! Your login: ${values.username}, your password: ${values.password}`,
+      );
+
+      // Go to Login page
+      navigate('/login');
+
+      resetForm();
+    } catch (error) {
+      console.error('Failed to create user:', error);
+    } finally {
+      // Alwais on end
+      setIsLoading(false);
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Formik
       initialValues={{ username: '', password: '', confirmPassword: '' }}
@@ -95,38 +105,12 @@ export const SignUpForm = () => {
           {/* Base form error */}
           {errors.submit && <div className='error_message submit_error'>{errors.submit}</div>}
 
-          {/* Submit button */}
-          <Button className='btn sign_up_btn' type='submit' disabled={isSubmitting}>
-            {isSubmitting ? 'Registation...' : 'Sign Up'}
+          {/* Submit button (Sign Up)*/}
+          <Button className='btn sign_up_btn' type='submit' disabled={isLoading}>
+            {isLoading ? 'Wait...' : 'Sign Up'}
           </Button>
         </Form>
       )}
     </Formik>
   );
 };
-
-// Old form
-// return (
-//   <>
-//     <form>
-//       <div className='form_title'>Create account</div>
-//       <div className='login_label'>
-//         {/* <span>Sign Up</span> */}
-//         <input type='text' placeholder='Username' />
-//       </div>
-//       <div className='password_label'>
-//         <input type='password' placeholder='Password' />
-//       </div>
-//       <div className='password_label'>
-//         <input type='password' placeholder='Confirm Password' />
-//       </div>
-//       <Button className={'btn sign_up_btn'} onClick={() => alert('Button clicked!')}>
-//         Sign Up
-//       </Button>
-//       {/* Temporary Debag Create User */}
-//       <Button className={'btn'} id={'debagCreate'} onClick={() => alert('Ok!')}>
-//         Debug Create
-//       </Button>
-//     </form>
-//   </>
-// );

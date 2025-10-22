@@ -1,19 +1,58 @@
-import 'axios';
-import { JSON_SERVER_API } from '.env';
+import axios from 'axios';
 
-const axios = require('axios');
-const API = JSON_SERVER_API;
-// Endpoints
-// users list -> users
+const API = 'http://localhost:3000/';
 
-// * Test GET request
-axios({
-  method: 'get',
-  url: API + users,
-});
+export const getUsers = async () => {
+  try {
+    const response = await axios.get(API + 'users');
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error;
+  } finally {
+    return true;
+  }
+};
 
-// const axios = require('axios');
-// POST
-// GET
-// UPDATE
-// DELITE
+export const getUserById = async (user_id) => {
+  try {
+    const responce = await axios.get(API + 'users/' + user_id);
+    return responce.data;
+  } catch (error) {
+    console.log('Something wrong, ' + error);
+    throw error;
+  }
+};
+
+export const getLastUserId = async () => {
+  try {
+    const users = await getUsers();
+
+    if (users.length === 0) {
+      return 0;
+    }
+
+    const maxId = Math.max(...users.map((user) => user.id));
+    return maxId;
+  } catch (error) {
+    console.log('Something wrong, ' + error);
+    throw error;
+  }
+};
+
+export const createUser = async (userData) => {
+  try {
+    const responce = await axios.post(API + 'users', {
+      username: userData.username,
+      password: userData.password,
+      isAdmin: false,
+    });
+
+    console.log('User created', responce.data);
+    return responce.data;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error;
+  }
+};

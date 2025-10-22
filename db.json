@@ -1,6 +1,124 @@
 {
   "users": [
-    { "id": 1, "username": "admin", "password": "admin", "isAdmin": true },
-    { "id": 2, "username": "test User 1", "password": "14881488", "isAdmin": false }
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin",
+      "isAdmin": true
+    },
+    {
+      "id": "2",
+      "username": "test User 1",
+      "password": "14881488",
+      "isAdmin": false
+    },
+    {
+      "id": "3",
+      "username": "Petro Poroshenko",
+      "password": "Roshen!",
+      "isAdmin": false
+    },
+    {
+      "id": "4",
+      "username": "zelensyy",
+      "password": "12345678",
+      "isAdmin": false
+    },
+    {
+      "id": "5",
+      "username": "zelensyy",
+      "password": "12345678",
+      "isAdmin": false
+    },
+    {
+      "id": "6",
+      "username": "zelensyy",
+      "password": "12345678",
+      "isAdmin": false
+    },
+    {
+      "id": "7",
+      "username": "azarov",
+      "password": "zxcvbnm",
+      "isAdmin": false
+    },
+    {
+      "id": "8",
+      "username": "Timoshenko",
+      "password": "rakaka",
+      "isAdmin": false
+    },
+    {
+      "id": "9",
+      "username": "qwerdssdg",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "10",
+      "username": "qwerdssdg",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "11",
+      "username": "dfdsfsdfdsfs",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "12",
+      "username": "dfdsfsdfdsfs",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "13",
+      "username": "dfdsfsdfdsfs",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "14",
+      "username": "111111",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "15",
+      "username": "111111",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "16",
+      "username": "111111",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "2b77",
+      "username": "azerot",
+      "password": "alians",
+      "isAdmin": false
+    },
+    {
+      "id": "f4d2",
+      "username": "OrdaXAXA",
+      "password": "111111",
+      "isAdmin": false
+    },
+    {
+      "id": "d37d",
+      "username": "Trumpampam",
+      "password": "Zoloto",
+      "isAdmin": false
+    },
+    {
+      "id": "2fc5",
+      "username": "kotikk",
+      "password": "kotikk",
+      "isAdmin": false
+    }
   ]
 }

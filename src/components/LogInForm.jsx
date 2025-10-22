@@ -17,7 +17,6 @@ const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     console.log('Form values:', values);
 
     // API Request
-    // GET reques
     // End API Request
 
     // Simulation delay

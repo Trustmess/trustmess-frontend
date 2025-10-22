@@ -19,11 +19,9 @@ export const WelcomePage = () => {
         <Button className={'btn change_theme_btn'} dataTheme={theme} onClick={toggleTheme}>
           <span className='material-icons'>{theme + '_mode'}</span>
         </Button>
-
         <Button className={'btn sign_up_btn'} onClick={() => navigate('/signup')}>
           Sign Up
         </Button>
-
         <Button className={'btn log_in_btn'} onClick={() => navigate('/login')}>
           Log In
         </Button>
