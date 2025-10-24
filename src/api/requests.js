@@ -11,17 +11,26 @@ export const getUsers = async () => {
     console.error('Error fetching users:', error);
     throw error;
   } finally {
-    return true;
+    console.log('getUsers completed');
   }
 };
 
 export const getUserById = async (user_id) => {
   try {
-    const responce = await axios.get(API + 'users/' + user_id);
-    return responce.data;
+    const response = await axios.get(API + 'users/' + user_id);
+    return response.data;
   } catch (error) {
     console.log('Something wrong, ' + error);
     throw error;
+  }
+};
+
+export const getUserByName = async (user_username) => {
+  try {
+    const response = await axios.get(API + 'users?username=' + user_username);
+    return response.data[0];
+  } catch (error) {
+    console.log('Something wrong, ' + error);
   }
 };
 

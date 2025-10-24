@@ -1,0 +1,96 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+@use 'sass:color';
+
+:root[data-theme='dark'] {
+  .messenger_page {
+    background-color: $background-color-primary-dark-theme;
+    color: $text-color-primary-dark-theme;
+
+    .nav_line,
+    .messenger_container {
+      background-color: $background-color-secondary-dark-theme;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .btn {
+    background-color: $button-background-color-dark-theme;
+    color: $button-text-color-dark-theme;
+
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: color.adjust($button-background-color-dark-theme, $lightness: 10%);
+      cursor: pointer;
+    }
+  }
+}
+
+.messenger_page {
+  @include flex_center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100vh;
+  padding: 1% 2%;
+
+  background-color: $background-color-primary-light-theme;
+  color: $text-color-primary-light-theme;
+
+  .nav_line {
+    position: static;
+    flex-shrink: 0;
+    width: 100%;
+
+    display: flex;
+
+    gap: 20px;
+
+    background-color: $background-color-secondary-light-theme;
+    padding: 10px 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+
+    .change_theme_btn {
+      @include change_theme_btn;
+    }
+
+    .btn_log_out {
+      width: auto;
+    }
+  }
+
+  .messenger_container {
+    flex: 1;
+    width: 100%;
+    gap: 20px;
+
+    display: flex;
+
+    background-color: $background-color-secondary-light-theme;
+    padding: 10px 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+
+    .contacts_panel {
+      display: flex;
+      width: 30%;
+      padding: 5px 10px;
+      // Temporary
+      border: 2px solid red;
+    }
+    .dialog_panel {
+      display: flex;
+      width: 70%;
+      // Temporary
+      border: 2px solid red;
+    }
+  }
+
+  .btn {
+    @include btn_style_primary;
+  }
+
+  .back_btn {
+    @include back_btn;
+  }
+}

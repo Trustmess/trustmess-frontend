@@ -52,8 +52,17 @@
   appearance: none;
   -webkit-appearance: none;
 
+  .theme_ico {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 60%;
+  }
   span {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 60%;
     height: 60%;
   }
