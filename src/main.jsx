@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@contexts/ThemeContext';
-import './scss/style.scss';
+import '/src/css/tailwind.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

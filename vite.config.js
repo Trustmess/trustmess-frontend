@@ -4,12 +4,13 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { assetFileNamer, chunkSplitter } from './conf';
 import autoprefixer from 'autoprefixer';
+import tailwindcss from "@tailwindcss/vite"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   root: '.',
   base: './',
   publicDir: 'public',
