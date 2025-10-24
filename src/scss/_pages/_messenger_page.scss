@@ -8,7 +8,11 @@
     color: $text-color-primary-dark-theme;
 
     .nav_line,
-    .messenger_container {
+    .messenger_container,
+    .contacts_panel,
+    .contact_card_container,
+    .contact_card_container_name,
+    .contact_card_container_ico {
       background-color: $background-color-secondary-dark-theme;
       box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     }
@@ -26,71 +30,109 @@
   }
 }
 
-.messenger_page {
-  @include flex_center;
-  flex-direction: column;
-  gap: 20px;
-  height: 100vh;
-  padding: 1% 2%;
-
-  background-color: $background-color-primary-light-theme;
-  color: $text-color-primary-light-theme;
-
-  .nav_line {
-    position: static;
-    flex-shrink: 0;
-    width: 100%;
-
-    display: flex;
-
+:root[data-theme='light'] {
+  .messenger_page {
+    @include flex_center;
+    flex-direction: column;
     gap: 20px;
+    height: 100vh;
+    padding: 1% 2%;
 
-    background-color: $background-color-secondary-light-theme;
-    padding: 10px 15px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
+    background-color: $background-color-primary-light-theme;
+    color: $text-color-primary-light-theme;
 
-    .change_theme_btn {
-      @include change_theme_btn;
-    }
+    .nav_line {
+      position: static;
+      flex-shrink: 0;
+      width: 100%;
 
-    .btn_log_out {
-      width: auto;
-    }
-  }
-
-  .messenger_container {
-    flex: 1;
-    width: 100%;
-    gap: 20px;
-
-    display: flex;
-
-    background-color: $background-color-secondary-light-theme;
-    padding: 10px 15px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
-
-    .contacts_panel {
       display: flex;
-      width: 30%;
-      padding: 5px 10px;
-      // Temporary
-      border: 2px solid red;
+
+      gap: 20px;
+
+      background-color: $background-color-secondary-light-theme;
+      padding: 10px 15px;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 30px;
+
+      .change_theme_btn {
+        @include change_theme_btn;
+      }
+
+      .btn_log_out {
+        width: auto;
+      }
     }
-    .dialog_panel {
+
+    .messenger_container {
+      flex: 1;
+      width: 100%;
+      gap: 20px;
+
       display: flex;
-      width: 70%;
-      // Temporary
-      border: 2px solid red;
+
+      background-color: $background-color-secondary-light-theme;
+      padding: 10px 15px;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 30px;
+
+      .contacts_panel {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 30%;
+
+        .contact_card_container {
+          // DEV
+          // border: 2px dashed red;
+          // END DEV
+          font-size: $font-size-medium;
+          display: flex;
+          flex-direction: row;
+          gap: 20px;
+
+          border-radius: 15px;
+          box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+
+          padding: 10px;
+
+          .contact_card_container_ico {
+            display: flex;
+            align-items: center;
+
+            flex-shrink: 0;
+            background: $accent-color-light-theme;
+            color: $button-text-color-light-theme;
+            border-radius: 50%;
+            padding: 10px;
+          }
+          .contact_card_container_name {
+            display: flex;
+            align-items: center;
+
+            flex: 1;
+            min-width: 0;
+
+            white-space: nowrap;
+            overflow: hidden;
+            flex-wrap: nowrap;
+          }
+        }
+      }
+      .dialog_panel {
+        display: flex;
+        width: 70%;
+        // Temporary
+        // border: 2px solid red;
+      }
     }
-  }
 
-  .btn {
-    @include btn_style_primary;
-  }
+    .btn {
+      @include btn_style_primary;
+    }
 
-  .back_btn {
-    @include back_btn;
+    .back_btn {
+      @include back_btn;
+    }
   }
 }
