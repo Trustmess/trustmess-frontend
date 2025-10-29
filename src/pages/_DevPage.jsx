@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { ContactCard } from '/src/components/ContactCard';
 import { Button } from '/src/components/Button';
 
-import { getUserByName, getUserById, getUsers } from '/src/api/requests';
+import { getUsers } from '/src/api/requests';
 
 export const DevPage = () => {
   const [users, setUsers] = useState([]);

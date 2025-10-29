@@ -2,8 +2,8 @@
   "users": [
     {
       "id": "1",
-      "username": "admin",
-      "password": "admin",
+      "username": "admin1",
+      "password": "admin1",
       "isAdmin": true
     },
     {
@@ -28,6 +28,24 @@
       "id": "d9b8",
       "username": "Albert Einstein",
       "password": "dadada",
+      "isAdmin": false
+    },
+    {
+      "id": "75d9",
+      "username": "Peperoni",
+      "password": "carbonara",
+      "isAdmin": false
+    },
+    {
+      "id": "2a71",
+      "username": "NoGenryFord",
+      "password": "xarzmb32",
+      "isAdmin": false
+    },
+    {
+      "id": "c62d",
+      "username": "kotik1488",
+      "password": "1488kotik",
       "isAdmin": false
     }
   ]

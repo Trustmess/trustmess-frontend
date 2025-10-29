@@ -1,5 +1,3 @@
-import { getUserByName } from '/src/api/requests';
-
 export const ContactCard = ({ userName = 'Unknown' }) => {
   const createIco = () => {
     const parts = userName.trim().split(/\s+/);

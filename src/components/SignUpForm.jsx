@@ -35,11 +35,7 @@ export const SignUpForm = () => {
     try {
       // API Request
       const newUser = await createUser(values);
-      console.log('User successfully created');
-      // Tepmorary
-      alert(
-        `Account was created! Your login: ${values.username}, your password: ${values.password}`,
-      );
+      console.log('User successfully created', values);
 
       // Go to Login page
       navigate('/login');

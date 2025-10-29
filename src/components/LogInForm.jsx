@@ -1,9 +1,10 @@
 import { Button } from './Button';
-// Import google material icons
-// import '/node_modules/material-icons/iconfont/material-icons.css';
 // Import formik & YUP (for validation)
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+
+import { getUserByName } from '/src/api/requests';
 
 // Validation form
 const loginSchema = Yup.object({
@@ -11,28 +12,40 @@ const loginSchema = Yup.object({
   password: Yup.string().min(6, 'Use minimum 6 symbols').required('Enter password'),
 });
 
-// Submit form
-const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-  try {
-    console.log('Form values:', values);
-
-    // API Request
-    // End API Request
-
-    // Simulation delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Tepmorary
-    alert(`Your login: ${values.username}, your password: ${values.password}`);
-  } catch (error) {
-    setErrors({ submit: 'Wrong login or password' });
-  } finally {
-    // Alwais on end
-    setSubmitting(false);
-  }
-};
-
 export const LogInForm = () => {
+  // Routing
+  const navigate = useNavigate();
+
+  // Submit form
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    try {
+      console.log('Form values:', values);
+      console.log('Inputed username: ', values.username);
+
+      // API Request
+      const getUser = await getUserByName(values.username);
+      const user = getUser[0];
+      console.log('Unpacked user from DB: ', user);
+      console.log('user login: ', user.username);
+      console.log('user password: ', user.password);
+
+      if (values.username === user.username && values.password === user.password) {
+        console.log('Log in was successfull');
+        console.log('Go to messeging');
+
+        navigate('/messenger');
+      } else {
+        console.log('Wrong login or password');
+        setErrors({ submit: 'Wrong login or password' });
+      }
+      setSubmitting(false);
+
+      // End API Request
+    } catch (error) {
+      console.error('Something wrong...');
+    }
+  };
+
   // New form
   return (
     <Formik
@@ -76,24 +89,4 @@ export const LogInForm = () => {
       )}
     </Formik>
   );
-
-  // Old form
-  // return (
-  //   <>
-  //     <form>
-  //       <div className='form_title'>Enter login and password</div>
-  //       <div className='login_label'>
-  //         {/* <span>Login:</span> */}
-  //         <input type='text' placeholder='Username' />
-  //       </div>
-  //       <div className='password_label'>
-  //         {/* <span>Password:</span> */}
-  //         <input type='password' placeholder='Password' />{' '}
-  //       </div>
-  //       <Button className={'btn log_in_btn'} onClick={() => alert('Button clicked!')}>
-  //         Log In
-  //       </Button>
-  //     </form>
-  //   </>
-  // );
 };
