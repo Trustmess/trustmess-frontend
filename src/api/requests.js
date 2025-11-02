@@ -15,22 +15,6 @@ export const getUserById = async (user_id) => {
   }
 };
 
-export const createUser = async (userData) => {
-  try {
-    const response = await axios.post(API + 'users', {
-      username: userData.username,
-      password: userData.password,
-      isAdmin: false,
-    });
-
-    console.log('User created. New account', response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    throw error;
-  }
-};
-
 // * WORKED WITH BACKEND REQUESTS
 export const getUsers = async () => {
   try {
@@ -48,6 +32,20 @@ export const getUsers = async () => {
 export const login = async (userData) => {
   try {
     const response = await axios.post(API + 'auth/login', {
+      username: userData.username,
+      password: userData.password,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log('Something wrong, ' + error);
+    throw error;
+  }
+};
+
+export const register = async (userData) => {
+  try {
+    const response = await axios.post(API + 'auth/register', {
       username: userData.username,
       password: userData.password,
     });

@@ -3,4 +3,4 @@ export { LogInPage } from './LogInPage';
 export { SignUpPage } from './SignUpPage';
 export { MessengerPage } from './MessengerPage';
 // DEV PAGES
-export { DevPage } from './_DevPage';
+// export { DevPage } from './_DevPage';

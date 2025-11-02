@@ -5,7 +5,7 @@ import { Button } from './Button';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 // Import APIs
-import { createUser } from '/src/api/requests';
+import { register } from '/src/api/requests';
 
 // Validation form
 const signupSchema = Yup.object({
@@ -34,7 +34,7 @@ export const SignUpForm = () => {
     setIsLoading(true);
     try {
       // API Request
-      const newUser = await createUser(values);
+      const newUser = await register(values);
       console.log('User successfully created', values);
 
       // Go to Login page

@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { WelcomePage, LogInPage, SignUpPage, MessengerPage } from '@pages';
 // DEV IMPORTS
-import { DevPage } from '@pages';
+// import { DevPage } from '@pages';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 export const App = () => {
@@ -19,7 +19,7 @@ export const App = () => {
         }
       />
       {/* DEV PAGES */}
-      <Route path='/dev' element={<DevPage />} />
+      {/* <Route path='/dev' element={<DevPage />} /> */}
     </Routes>
   );
 };
