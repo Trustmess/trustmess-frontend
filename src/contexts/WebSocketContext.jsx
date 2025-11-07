@@ -9,14 +9,20 @@ export const WebSocketProvider = ({ children }) => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
   const wsRef = useRef(null);
+  const shouldReconnect = useRef(true);
 
   useEffect(() => {
     if (isAuthenticated && user) {
       console.log('Attempting WebSocket connection for user:', user.username);
+      shouldReconnect.current = true;
       connectWebSocket();
+    } else {
+      shouldReconnect.current = false;
+      disconnectWebSocket();
     }
 
     return () => {
+      shouldReconnect.current = false;
       disconnectWebSocket();
     };
   }, [isAuthenticated, user]);
@@ -59,11 +65,13 @@ export const WebSocketProvider = ({ children }) => {
         setIsConnected(false);
 
         // Option: auto reconnect
-        if (isAuthenticated && user) {
+        if (shouldReconnect.current && isAuthenticated && user) {
           console.log('Attempting to reconnect in 3 seconds...');
           setTimeout(() => {
             connectWebSocket();
           }, 3000);
+        } else {
+          console.log('Reconnect disabled (user logged out)');
         }
       };
     } catch (error) {
@@ -77,6 +85,7 @@ export const WebSocketProvider = ({ children }) => {
       wsRef.current.close();
       wsRef.current = null;
       setIsConnected(false);
+      setOnlineUsers([]);
     }
   };
 
