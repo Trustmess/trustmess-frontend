@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host --cors",
-    "build": "vite clean && vite build",
+    "build dev": "vite build --mode development",
+    "build": "vite build --mode production",
     "preview": "vite preview",
     "lint": "eslint .",
     "test": "vitest",
