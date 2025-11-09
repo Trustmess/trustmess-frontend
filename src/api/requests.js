@@ -1,29 +1,27 @@
 import axios from 'axios';
-// import { getApiUrl } from '/src/config/apiConfig';
+import { getApiUrl } from '/src/config/apiConfig';
 
 // Get API URL from environment and ensure it ends with /
-const API = import.meta.env.VITE_FASTAPI_SERVER?.endsWith('/')
-  ? import.meta.env.VITE_FASTAPI_SERVER
-  : import.meta.env.VITE_FASTAPI_SERVER + '/';
+let API = null;
 
-// const initAPI = async () => {
-//   if (!API) {
-//     API = await getApiUrl();
-//   }
-//   return API;
-// };
+const initAPI = async () => {
+  if (!API) {
+    API = await getApiUrl();
+  }
+  return API;
+};
 
-// const ensureAPI = async () => {
-//   if (!API) {
-//     await initAPI();
-//   }
-//   return API;
-// };
+const ensureAPI = async () => {
+  if (!API) {
+    await initAPI();
+  }
+  return API;
+};
 
 // ! OLD REQUESTS, NEED TO REWORK OR DELETE
 export const getUserById = async (user_id) => {
   try {
-    // const API = await ensureAPI();
+    const API = await ensureAPI();
     const response = await axios.get(API + 'users/' + user_id);
     console.log('Requset getUserById completed. Getted user: ', response.data);
     return response.data;
@@ -36,7 +34,7 @@ export const getUserById = async (user_id) => {
 // * WORKED WITH BACKEND REQUESTS
 export const getUsers = async () => {
   try {
-    // const API = await ensureAPI();
+    const API = await ensureAPI();
     const response = await axios.get(API + 'users');
 
     return response.data;
@@ -50,7 +48,7 @@ export const getUsers = async () => {
 
 export const login = async (userData) => {
   try {
-    // const API = await ensureAPI();
+    const API = await ensureAPI();
     const response = await axios.post(API + 'auth/login', {
       username: userData.username,
       password: userData.password,
@@ -65,7 +63,7 @@ export const login = async (userData) => {
 
 export const register = async (userData) => {
   try {
-    // const API = await ensureAPI();
+    const API = await ensureAPI();
     const response = await axios.post(API + 'auth/register', {
       username: userData.username,
       password: userData.password,

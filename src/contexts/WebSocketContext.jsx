@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useRef } from 'react';
 import { useAuth } from './AuthContext';
+import { getApiUrl } from '/src/config/apiConfig';
 
 const WebSocketContext = createContext();
 
@@ -33,11 +34,11 @@ export const WebSocketProvider = ({ children }) => {
 
   const connectWebSocket = async () => {
     try {
-      // Get API URL directly from environment variable
-      const apiUrl = import.meta.env.VITE_FASTAPI_SERVER;
-      
+      // Get API URL from apiConfig (finds working API)
+      const apiUrl = await getApiUrl();
+
       if (!apiUrl) {
-        console.error('VITE_FASTAPI_SERVER is not defined in .env');
+        console.error('No working API found');
         return;
       }
 
@@ -80,14 +81,14 @@ export const WebSocketProvider = ({ children }) => {
           if (reconnectAttempts.current < maxReconnectAttempts) {
             reconnectAttempts.current += 1;
             console.log(
-              `Attempting to reconnect in 3 seconds... (Attempt ${reconnectAttempts.current}/${maxReconnectAttempts})`
+              `Attempting to reconnect in 3 seconds... (Attempt ${reconnectAttempts.current}/${maxReconnectAttempts})`,
             );
             setTimeout(() => {
               connectWebSocket();
             }, 3000);
           } else {
             console.warn(
-              `Maximum reconnection attempts (${maxReconnectAttempts}) reached. Giving up.`
+              `Maximum reconnection attempts (${maxReconnectAttempts}) reached. Giving up.`,
             );
             shouldReconnect.current = false;
           }
