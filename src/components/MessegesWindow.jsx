@@ -3,10 +3,18 @@ import { useWebSocket } from '@contexts/WebSocketContext';
 import { useAuth } from '@contexts/AuthContext';
 import { useState } from 'react';
 
-export const MessegesWindow = () => {
+export const MessegesWindow = ({ selectedContact }) => {
   const { sendMessage, messages } = useWebSocket();
   const { user } = useAuth();
   const [inputValue, setInputValue] = useState('');
+
+  if (!selectedContact) {
+    return (
+      <div className='messeges_window'>
+        <div className='no_contact_selected'>Choose user for communicate</div>
+      </div>
+    );
+  }
 
   const currentChatMessages = messages.filter(
     (msg) =>
@@ -16,7 +24,7 @@ export const MessegesWindow = () => {
 
   const handleSend = () => {
     if (!selectedContact) {
-      alert('Виберіть контакт');
+      alert('Choose contact');
       return;
     }
 
@@ -37,8 +45,14 @@ export const MessegesWindow = () => {
         ))}
       </div>
       <div className='action_bar'>
-        <input className='message_input'></input>
-        <Button className={'btn send_message_btn'}>Send</Button>
+        <input
+          className='message_input'
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder='Enter message'></input>
+        <Button className={'btn send_message_btn'} onClick={handleSend}>
+          Send
+        </Button>
       </div>
     </div>
   );

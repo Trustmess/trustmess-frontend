@@ -1,6 +1,7 @@
 import { useTheme } from '@contexts/ThemeContext';
 import { Button, ContactCard, MessegesWindow } from '@components';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useAuth } from '/src/contexts/AuthContext';
 import { useWebSocket } from '/src/contexts/WebSocketContext';
 // React-icons
@@ -11,11 +12,11 @@ import '/src/scss/_pages/_messenger_page.scss';
 
 export const MessengerPage = () => {
   const { user, isAuthenticated, logout } = useAuth();
-
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
-
   const { onlineUsers, isConnected } = useWebSocket();
+
+  const [selectedContact, setSelectedContact] = useState(null);
 
   // Temporary for testing
   console.log('Online users:', onlineUsers);
@@ -58,11 +59,22 @@ export const MessengerPage = () => {
           ) : onlineUsers.length === 0 ? (
             <div className='no-users-message'>No users online</div>
           ) : (
-            onlineUsers.map((user) => <ContactCard key={user.id} userName={user.username} />)
+            onlineUsers
+              .filter((onlineUsers) => onlineUsers.id !== user.id)
+              .map((onlineUser) => (
+                <ContactCard
+                  key={onlineUser.id}
+                  userName={onlineUser.username}
+                  onClick={() => setSelectedContact(onlineUser)}
+                  isActive={selectedContact?.id === onlineUser.id}
+                />
+              ))
           )}
         </div>
         <div className='dialog_panel'>
-          <MessegesWindow className='messeges_window'></MessegesWindow>
+          <MessegesWindow
+            className='messeges_window'
+            selectedContact={selectedContact}></MessegesWindow>
         </div>
       </main>
     </div>

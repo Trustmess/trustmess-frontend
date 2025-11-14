@@ -1,4 +1,4 @@
-export const ContactCard = ({ userName = 'Unknown' }) => {
+export const ContactCard = ({ userName = 'Unknown', onClick, isActive }) => {
   const createIco = () => {
     const parts = userName.trim().split(/\s+/);
     if (parts.length >= 2) {
@@ -11,7 +11,10 @@ export const ContactCard = ({ userName = 'Unknown' }) => {
   };
 
   return (
-    <div className='contact_card_container'>
+    <div
+      className={`contact_card_container ${isActive ? 'active' : ''}`}
+      onClick={onClick}
+      style={{ cursor: 'pointer' }}>
       <div className='contact_card_container_ico'>{createIco()}</div>
       <div className='contact_card_container_name'>{userName}</div>
     </div>
