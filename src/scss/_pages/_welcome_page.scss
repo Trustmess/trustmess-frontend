@@ -48,7 +48,14 @@
 
   .btn {
     @include btn_style_primary;
+    font-size: $font-size-base-small;
     width: 50%;
+
+    @media (max-width: 767px) {
+    }
+    @media (max-width: 479px) {
+      width: 90%;
+    }
   }
 
   .nav_line {

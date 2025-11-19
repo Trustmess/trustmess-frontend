@@ -5,7 +5,8 @@ import { Button } from './Button';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 // Import APIs
-import { register } from '/src/api/requests';
+import { register, login } from '/src/api/requests';
+import { useAuth } from '@contexts';
 
 // Validation form
 const signupSchema = Yup.object({
@@ -25,6 +26,7 @@ const signupSchema = Yup.object({
 export const SignUpForm = () => {
   // Routing
   const navigate = useNavigate();
+  const { login: setUser } = useAuth();
   // loading state
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,8 +39,18 @@ export const SignUpForm = () => {
       const newUser = await register(values);
       // console.log('User successfully created', values); // * LOGS
 
-      // Go to messenger page
-      navigate('/messenger');
+      // API Request
+      const response = await login(values);
+      console.log('Successfull response from server:', response.user);
+
+      if (response.status === 'success') {
+        console.log('Login Successfull:', response.user.username);
+        setUser(response.user, response.access_token);
+        navigate('/messenger');
+      } else {
+        console.log('Login failed');
+        setErrors({ submit: 'Wrong login or password' });
+      }
 
       resetForm();
     } catch (error) {

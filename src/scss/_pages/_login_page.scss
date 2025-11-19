@@ -138,6 +138,7 @@
 
   .btn {
     @include btn_style_primary;
+    font-size: $font-size-base-small;
 
     @media (max-width: 767px) {
     }
