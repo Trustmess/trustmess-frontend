@@ -4,8 +4,8 @@ import { useTheme } from '@contexts/ThemeContext';
 
 // Impoty styles
 import '/src/scss/_pages/_welcome_page.scss';
-// Import google material icons
-import 'material-icons/iconfont/material-icons.css';
+// import react icons
+import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
 export const WelcomePage = () => {
   const navigate = useNavigate();
@@ -15,9 +15,13 @@ export const WelcomePage = () => {
     <div className='welcome_page' id='welcomePage'>
       {/* Nav Line */}
       <nav className='nav_line' id='navLine'>
-        {/* Theme switch */}
+        {/* Theme switch  NEW REACT ICONS*/}
         <Button className={'btn change_theme_btn'} dataTheme={theme} onClick={toggleTheme}>
-          <span className='material-icons'>{theme + '_mode'}</span>
+          {theme === 'dark' ? (
+            <MdDarkMode className='theme_ico' />
+          ) : (
+            <MdLightMode className='theme_ico' />
+          )}
         </Button>
       </nav>
 
