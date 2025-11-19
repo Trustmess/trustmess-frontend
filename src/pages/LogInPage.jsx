@@ -5,7 +5,7 @@ import { useTheme } from '@contexts/ThemeContext';
 // Import SCSS
 import '/src/scss/_pages/_login_page.scss';
 // import react icons
-import { MdDarkMode, MdLightMode, MdArrowBackIos, MdArrowBackIosNew } from 'react-icons/md';
+import { MdDarkMode, MdLightMode, MdArrowBackIosNew } from 'react-icons/md';
 
 export const LogInPage = () => {
   const navigate = useNavigate();
