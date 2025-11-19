@@ -26,7 +26,7 @@ export const WelcomePage = () => {
       </nav>
 
       <div className='welcome_page_container'>
-        <div className='welcome_page_title'>Trust Mess</div>
+        <div className='welcome_page_title'>TrustMess</div>
 
         <Button className={'btn sign_up_btn'} onClick={() => navigate('/signup')}>
           Sign Up
