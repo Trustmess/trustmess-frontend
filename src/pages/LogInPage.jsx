@@ -2,10 +2,10 @@ import { Button, LogInForm } from '@components';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@contexts/ThemeContext';
 
-// Import google material icons
-import 'material-icons/iconfont/material-icons.css';
 // Import SCSS
 import '/src/scss/_pages/_login_page.scss';
+// import react icons
+import { MdDarkMode, MdLightMode, MdArrowBackIos, MdArrowBackIosNew } from 'react-icons/md';
 
 export const LogInPage = () => {
   const navigate = useNavigate();
@@ -15,16 +15,26 @@ export const LogInPage = () => {
     <div className='login_page' id='loginPage'>
       {/* Nav Line */}
       <nav className='nav_line' id='navLine'>
-        {/* Theme switch */}
+        {/* Theme switch  NEW REACT ICONS*/}
         <Button className={'btn change_theme_btn'} dataTheme={theme} onClick={toggleTheme}>
-          <span className='material-icons'>{theme + '_mode'}</span>
+          {theme === 'dark' ? (
+            <MdDarkMode className='theme_ico' />
+          ) : (
+            <MdLightMode className='theme_ico' />
+          )}
         </Button>
       </nav>
 
       <LogInForm />
 
-      <Button className={'btn back_btn'} onClick={() => navigate('/')}>
+      {/* OLD ARROW BACK */}
+      {/* <Button className={'btn back_btn'} onClick={() => navigate('/')}>
         <span className='material-icons'>arrow_back_ios_new</span>
+      </Button> */}
+
+      {/* NEW ARROW BACK */}
+      <Button className={'btn back_btn'} onClick={() => navigate('/')}>
+        <MdArrowBackIosNew className='material-icons' />
       </Button>
     </div>
   );

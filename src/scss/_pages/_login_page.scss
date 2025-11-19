@@ -47,6 +47,16 @@
 
   background-color: $background-color-primary-light-theme;
   color: $text-color-primary-light-theme;
+  font-size: $font-size-large;
+
+  @media (max-width: 767px) {
+  }
+  @media (max-width: 479px) {
+    padding-top: env(safe-area-inset-top, 12px);
+    padding-bottom: env(safe-area-inset-bottom, 12px);
+
+    font-size: $font-size-mobile;
+  }
 
   .nav_line {
     position: fixed;
@@ -63,6 +73,13 @@
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
 
+    @media (max-width: 767px) {
+    }
+    @media (max-width: 479px) {
+      font-size: $font-size-mobile;
+      gap: 10px;
+    }
+
     .change_theme_btn {
       @include change_theme_btn;
     }
@@ -72,7 +89,6 @@
     @include flex_center;
     flex-direction: column;
     gap: 20px;
-
     width: 50%;
 
     background-color: $background-color-secondary-light-theme;
@@ -80,10 +96,13 @@
     padding: 20px 15px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
-  }
 
-  .form_title {
-    font-size: $font-size-large; // 32px
+    @media (max-width: 767px) {
+    }
+    @media (max-width: 479px) {
+      gap: 10px;
+      width: 90%;
+    }
   }
 
   .login_label,
@@ -106,6 +125,12 @@
       border: 2px solid $button-background-color-light-theme;
     }
 
+    @media (max-width: 767px) {
+    }
+    @media (max-width: 479px) {
+      width: 90%;
+    }
+
     input {
       @include input_style_primary;
     }
@@ -113,10 +138,12 @@
 
   .btn {
     @include btn_style_primary;
-  }
 
-  .change_theme_btn {
-    @include change_theme_btn;
+    @media (max-width: 767px) {
+    }
+    @media (max-width: 479px) {
+      width: 90%;
+    }
   }
 
   .back_btn {
