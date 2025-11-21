@@ -13,6 +13,12 @@
     "coverage": "vitest run --coverage",
     "test:watch": "vitest --watch"
   },
+  "browserslist": [
+    "defaults",
+    "not ie <= 11",
+    "not op_mini all",
+    "safari >= 13"
+  ],
   "dependencies": {
     "@types/node": "^24.8.1",
     "autoprefixer": "^10.4.21",

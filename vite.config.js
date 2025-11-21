@@ -57,7 +57,7 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: false,
     minify: 'esbuild',
-    target: 'es2024',
+    target: 'es2019',
     esbuild: {
       legalComments: 'none',
     },
