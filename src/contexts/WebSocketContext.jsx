@@ -46,12 +46,16 @@ export const WebSocketProvider = ({ children }) => {
         return;
       }
 
-      const wsBaseUrl = apiUrl
-        .replace('http://', 'ws://')
-        .replace('https://', 'wss://')
-        .replace(/\/$/, '');
+      const getWebSocketUrl = (apiUrl, userId) => {
+        const url = new URL(apiUrl);
+        url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
+        // Fix: construct path separately to avoid URL normalization issues
+        const cleanPath = url.pathname.replace(/\/+$/, '');
+        url.pathname = `${cleanPath}/ws/${userId}`;
+        return url.toString();
+      };
 
-      const wsUrl = `${wsBaseUrl}/ws/${user.id}`;
+      const wsUrl = getWebSocketUrl(apiUrl, user.id);
 
       console.log('Connecting to WebSocked:', wsUrl);
       wsRef.current = new WebSocket(wsUrl);
