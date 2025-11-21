@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useAuth } from '/src/contexts/AuthContext';
 import { useWebSocket } from '/src/contexts/WebSocketContext';
 // React-icons
-import { MdDarkMode, MdLightMode } from 'react-icons/md';
+import { MdDarkMode, MdLightMode, MdArrowBackIosNew } from 'react-icons/md';
 
 // Import SCSS
 import '/src/scss/_pages/_messenger_page.scss';
@@ -52,7 +52,7 @@ export const MessengerPage = () => {
         </Button>
       </nav>
 
-      <main className='messenger_container'>
+      <main className={`messenger_container ${selectedContact ? 'chat_open' : ''}`}>
         <div className='contacts_panel'>
           {!isConnected ? (
             <div className='connecting-message'>Connecting to server...</div>
@@ -74,7 +74,8 @@ export const MessengerPage = () => {
         <div className='dialog_panel'>
           <MessegesWindow
             className='messeges_window'
-            selectedContact={selectedContact}></MessegesWindow>
+            selectedContact={selectedContact}
+            onClose={() => setSelectedContact(null)}></MessegesWindow>
         </div>
       </main>
     </div>
