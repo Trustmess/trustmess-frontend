@@ -30,7 +30,7 @@ export const LogInForm = () => {
 
       if (response.status === 'success') {
         console.log('Login Successfull:', response.user.username);
-        setUser(response.user, response.access_token);
+        setUser(response.user);
         navigate('/messenger');
       } else {
         console.log('Login failed');

@@ -24,6 +24,24 @@ export default defineConfig({
     port: '5173',
     open: false,
     hmr: true,
+    proxy: {
+      // Proxy API requests to the backend so cookies are set on the same origin
+      '/auth': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/users': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/ws': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 
   css: {

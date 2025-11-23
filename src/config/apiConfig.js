@@ -1,16 +1,18 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_FASTAPI_SERVER || '';
+const API_URL = import.meta.env.VITE_FASTAPI_SERVER || '/';
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: API_URL,
+  withCredentials: true,
 });
 
 // Get list of URLs from .env
 const getApiUrls = () => {
   const urls = import.meta.env.VITE_FASTAPI_SERVER;
   if (!urls) {
-    return [''];
+    // When API URL is not set, we are using proxied requests on the same origin
+    return ['/'];
   }
   return urls.split(',').map((url) => url.trim());
 };
@@ -20,6 +22,13 @@ const pingApi = async (url) => {
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 500);
+
+    // If URL set to '/' (proxy), then don't attempt backend ping, just consider it available
+    if (url === '/' || url === '') {
+      clearTimeout(timeoutId);
+      console.log('Api proxy available at /');
+      return true;
+    }
 
     const cleanUrl = url.endsWith('/') ? url.slice(0, -1) : url;
 
