@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useAuth } from '/src/contexts/AuthContext';
 import { useWebSocket } from '/src/contexts/WebSocketContext';
 // React-icons
-import { MdDarkMode, MdLightMode, MdArrowBackIosNew } from 'react-icons/md';
+import { MdDarkMode, MdLightMode, MdArrowBackIosNew, MdOutlineSettings } from 'react-icons/md';
 
 // Import SCSS
 import '/src/scss/_pages/_messenger_page.scss';
@@ -59,6 +59,12 @@ export const MessengerPage = () => {
         <div className='auth_user_div'>{user?.username} </div>
         {/* Status indicate */}
         <div className='online_status_div'>{isConnected ? 'Online' : 'Offline'}</div>
+
+        {/* Setting btn */}
+        <Button className={'btn change_theme_btn'}>
+          <MdOutlineSettings />
+        </Button>
+
         {/* Theme switch */}
         <Button className={'btn change_theme_btn'} dataTheme={theme} onClick={toggleTheme}>
           {theme === 'dark' ? (
