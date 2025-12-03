@@ -1,5 +1,5 @@
 import { useTheme } from '@contexts/ThemeContext';
-import { Button, ContactCard, MessegesWindow } from '@components';
+import { Button, ContactCard, MessegesWindow, DeleteAccountModal } from '@components';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '/src/contexts/AuthContext';
@@ -17,6 +17,24 @@ export const MessengerPage = () => {
   const { onlineUsers, isConnected } = useWebSocket();
 
   const [selectedContact, setSelectedContact] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  // ? *****************************************************************
+  // Handle account deletion (simple example: you may want to call API to delete account)
+  const handleConfirmDelete = async () => {
+    try {
+      // TODO: add API call to delete account
+      // For now, logout and redirect to welcome page
+      logout();
+      navigate('/');
+    } catch (err) {
+      console.error('Delete account error:', err);
+      alert('Failed to delete account');
+    } finally {
+      setModalOpen(false);
+    }
+  };
+  // ? *****************************************************************
 
   // Temporary for testing
   console.log('Online users:', onlineUsers);
@@ -29,6 +47,14 @@ export const MessengerPage = () => {
   return (
     <div className='messenger_page'>
       <nav className='nav_line' id='navLine'>
+        {/* TEMPORARY DELETE BTN */}
+        <Button
+          className={'btn'}
+          onClick={() => {
+            setModalOpen(true);
+          }}>
+          DELETE
+        </Button>
         {/* User Logo */}
         <div className='auth_user_div'>{user?.username} </div>
         {/* Status indicate */}
@@ -51,6 +77,16 @@ export const MessengerPage = () => {
           Log out
         </Button>
       </nav>
+
+      {/* ******************************************* */}
+      {/* Delete account modal */}
+      <DeleteAccountModal
+        isOpen={isModalOpen}
+        onRequestClose={() => setModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+        username={user?.username}
+      />
+      {/* ******************************************* */}
 
       <main className={`messenger_container ${selectedContact ? 'chat_open' : ''}`}>
         <div className='contacts_panel'>

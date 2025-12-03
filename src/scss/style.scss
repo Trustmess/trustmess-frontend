@@ -3,3 +3,5 @@
 
 @use 'reset_all_styles';
 
+// Import global styles for modal windows
+@use '/src/scss/_components/modal_window';

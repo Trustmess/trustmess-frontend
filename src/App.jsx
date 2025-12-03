@@ -18,8 +18,6 @@ export const App = () => {
           </ProtectedRoute>
         }
       />
-      {/* DEV PAGES */}
-      {/* <Route path='/dev' element={<DevPage />} /> */}
     </Routes>
   );
 };
