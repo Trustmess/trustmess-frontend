@@ -7,6 +7,8 @@ import { useWebSocket } from '/src/contexts/WebSocketContext';
 // React-icons
 import { MdDarkMode, MdLightMode, MdArrowBackIosNew, MdOutlineSettings } from 'react-icons/md';
 
+import { deleteUser } from '/src/api/requests';
+
 // Import SCSS
 import '/src/scss/_pages/_messenger_page.scss';
 
@@ -24,6 +26,7 @@ export const MessengerPage = () => {
   const handleConfirmDelete = async () => {
     try {
       // TODO: add API call to delete account
+      const responce = await deleteUser(user.username);
       // For now, logout and redirect to welcome page
       logout();
       navigate('/');

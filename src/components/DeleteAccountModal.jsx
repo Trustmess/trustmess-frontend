@@ -2,6 +2,8 @@
 import React from 'react';
 import { ModalWrapper } from '@components';
 
+// import { deleteUser } from '/src/api/requests';
+
 export const DeleteAccountModal = ({ isOpen, onRequestClose, onConfirm, username }) => {
   return (
     <ModalWrapper

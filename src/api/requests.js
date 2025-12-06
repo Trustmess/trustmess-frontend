@@ -89,3 +89,14 @@ export const register = async (userData) => {
     throw error;
   }
 };
+
+export const deleteUser = async (username) => {
+  try {
+    const instance = await getAxiosInstance();
+    const response = instance.post('auth/delete_user', {
+      username: username,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
