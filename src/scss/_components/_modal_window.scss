@@ -1,18 +1,216 @@
-// For Modal Window
+// ============================================================================
+// Modal Window Styles
+// ============================================================================
+
+@use '../variables' as *;
+@use '../mixins' as *;
+@use 'sass:color';
+
+// Overlay — напівпрозорий фон за модалкою
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+
+  // Плавна анімація появи
+  animation: fadeIn 0.2s ease-out;
 }
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 480px;
-  width: 90%;
+// Контент модалки
+.modal_window {
+  display: flex;
+  flex-direction: column;
+
+  padding: 24px;
+  border-radius: 20px;
+  width: 50%;
+
+  box-shadow: var(--modal-shadow);
+  background-color: var(--modal-bg);
+  color: var(--modal-text);
+
+  // Плавна анімація появи
+  animation: slideUp 0.25s ease-out;
+
+  .modal-title {
+    font-size: $font-size-base;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .modal-body {
+    display: flex;
+    gap: 10px;
+    // flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 20px;
+    width: 90%;
+
+    font-size: $font-size-base-small;
+    line-height: 1.5;
+
+    p {
+      margin-bottom: 16px;
+    }
+
+    .change_theme_btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--modal-btn-bg);
+      color: var(--modal-btn-fg);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      // margin-bottom: 16px;
+
+      &:hover {
+        // background: var(--modal-btn-bg);
+        // color: var(--modal-btn-fg);
+        transform: scale(1.05);
+      }
+
+      .theme_ico {
+        font-size: 24px;
+      }
+    }
+
+    .btn_cancel,
+    .btn_account_settings,
+    .btn_log_out {
+      display: flex;
+
+      background-color: var(--modal-btn-bg);
+      color: var(--modal-btn-fg);
+
+      font-size: $font-size-base-small;
+      // width: 50%;
+
+      padding: 15px 20px;
+      border-radius: 10px;
+
+      transition: all 0.3s ease;
+
+      &:hover {
+        // background-color: var(--btn-bg-hover);
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    }
+
+    .account_settings_component {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      justify-content: space-between;
+      // justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .btn {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: space-between;
+        // justify-content: center;
+        align-items: center;
+
+        width: 50%;
+      }
+
+      .btn_danger {
+        display: flex;
+
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: $font-size-base-small;
+        background: #dc3545;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: color.adjust(#dc3545, $lightness: -10%);
+          cursor: pointer;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+
+// ============================================================================
+// Animations
+// ============================================================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ============================================================================
+// Theme Variables for Modal
+// ============================================================================
+:root[data-theme='light'] {
+  --modal-bg: #{$background-color-secondary-light-theme};
+  --modal-text: #{$text-color-primary-light-theme};
+  --modal-btn-bg: #{$button-background-color-light-theme};
+  --modal-btn-fg: #{$button-text-color-light-theme};
+  --modal-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme='dark'] {
+  --modal-bg: #{$background-color-secondary-dark-theme};
+  --modal-text: #{$text-color-primary-dark-theme};
+  --modal-btn-bg: #{$button-background-color-dark-theme};
+  --modal-btn-fg: #{$button-text-color-dark-theme};
+  --modal-shadow: 0px 2px 8px rgba(197, 35, 202, 0.3);
+}
+
+// ============================================================================
+// Mobile Responsive
+// ============================================================================
+@media (max-width: 479px) {
+  .modal-content {
+    width: 95%;
+    padding: 16px;
+    border-radius: 16px;
+
+    .modal-title {
+      font-size: $font-size-base-small;
+    }
+
+    .modal-body {
+      font-size: $font-size-mobile;
+    }
+
+    .btn-outline,
+    .btn-danger {
+      padding: 8px 16px;
+      font-size: $font-size-mobile;
+    }
+  }
 }

@@ -1,13 +1,11 @@
 import { useTheme } from '@contexts/ThemeContext';
-import { Button, ContactCard, MessegesWindow, DeleteAccountModal } from '@components';
-import { useNavigate } from 'react-router-dom';
+import { Button, ContactCard, MessegesWindow, SettingtModal } from '@components';
+// import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '/src/contexts/AuthContext';
 import { useWebSocket } from '/src/contexts/WebSocketContext';
 // React-icons
 import { MdDarkMode, MdLightMode, MdArrowBackIosNew, MdOutlineSettings } from 'react-icons/md';
-
-import { deleteUser } from '/src/api/requests';
 
 // Import SCSS
 import '/src/scss/_pages/_messenger_page.scss';
@@ -15,29 +13,27 @@ import '/src/scss/_pages/_messenger_page.scss';
 export const MessengerPage = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { onlineUsers, isConnected } = useWebSocket();
 
   const [selectedContact, setSelectedContact] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
 
-  // ? *****************************************************************
-  // Handle account deletion (simple example: you may want to call API to delete account)
-  const handleConfirmDelete = async () => {
-    try {
-      // TODO: add API call to delete account
-      const responce = await deleteUser(user.username);
-      // For now, logout and redirect to welcome page
-      logout();
-      navigate('/');
-    } catch (err) {
-      console.error('Delete account error:', err);
-      alert('Failed to delete account');
-    } finally {
-      setModalOpen(false);
-    }
-  };
-  // ? *****************************************************************
+  // Handle acount delete
+  // const handleConfirmDelete = async () => {
+  //   try {
+  //     // TODO: add API call to delete account
+  //     const responce = await deleteUser(user.username);
+  //     // For now, logout and redirect to welcome page
+  //     logout();
+  //     navigate('/');
+  //   } catch (err) {
+  //     console.error('Delete account error:', err);
+  //     alert('Failed to delete account');
+  //   } finally {
+  //     setModalOpen(false);
+  //   }
+  // };
 
   // Temporary for testing
   console.log('Online users:', onlineUsers);
@@ -50,49 +46,44 @@ export const MessengerPage = () => {
   return (
     <div className='messenger_page'>
       <nav className='nav_line' id='navLine'>
-        {/* TEMPORARY DELETE BTN */}
-        <Button
-          className={'btn'}
-          onClick={() => {
-            setModalOpen(true);
-          }}>
-          DELETE
-        </Button>
-        {/* User Logo */}
-        <div className='auth_user_div'>{user?.username} </div>
-        {/* Status indicate */}
-        <div className='online_status_div'>{isConnected ? 'Online' : 'Offline'}</div>
+        {/* User block */}
+        <div className='user_block'>
+          {/* User Logo */}
+          <div className='auth_user_div'>{user?.username} </div>
 
-        {/* Setting btn */}
-        <Button className={'btn change_theme_btn'}>
-          <MdOutlineSettings />
-        </Button>
+          {/* Status indicate */}
+          <div className='online_status_div'>{isConnected ? 'Online' : 'Offline'}</div>
+        </div>
 
-        {/* Theme switch */}
-        <Button className={'btn change_theme_btn'} dataTheme={theme} onClick={toggleTheme}>
-          {theme === 'dark' ? (
-            <MdDarkMode className='theme_ico' />
-          ) : (
-            <MdLightMode className='theme_ico' />
-          )}
-        </Button>
-        {/* Log out btn */}
-        <Button
-          className={'btn btn_log_out'}
-          onClick={() => {
-            logout();
-            navigate('/');
-          }}>
-          Log out
-        </Button>
+        {/* actions block */}
+        <div className='actions_block'>
+          {/* Setting btn */}
+          <Button
+            className={'btn change_theme_btn'}
+            onClick={() => {
+              setModalOpen(true);
+            }}>
+            <MdOutlineSettings />
+          </Button>
+
+          {/* Log out btn */}
+          {/* <Button
+            className={'btn btn_log_out'}
+            onClick={() => {
+              logout();
+              navigate('/');
+            }}>
+            Log out
+          </Button> */}
+        </div>
       </nav>
 
       {/* ******************************************* */}
-      {/* Delete account modal */}
-      <DeleteAccountModal
+      {/* Setting  modal */}
+      <SettingtModal
         isOpen={isModalOpen}
         onRequestClose={() => setModalOpen(false)}
-        onConfirm={handleConfirmDelete}
+        // onConfirm={handleConfirmDelete}
         username={user?.username}
       />
       {/* ******************************************* */}
