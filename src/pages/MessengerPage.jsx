@@ -1,7 +1,7 @@
 import { useTheme } from '@contexts/ThemeContext';
 import { Button, ContactCard, MessegesWindow, SettingtModal } from '@components';
 // import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '/src/contexts/AuthContext';
 import { useWebSocket } from '/src/contexts/WebSocketContext';
 // React-icons
@@ -19,25 +19,26 @@ export const MessengerPage = () => {
   const [selectedContact, setSelectedContact] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
 
-  // Handle acount delete
-  // const handleConfirmDelete = async () => {
-  //   try {
-  //     // TODO: add API call to delete account
-  //     const responce = await deleteUser(user.username);
-  //     // For now, logout and redirect to welcome page
-  //     logout();
-  //     navigate('/');
-  //   } catch (err) {
-  //     console.error('Delete account error:', err);
-  //     alert('Failed to delete account');
-  //   } finally {
-  //     setModalOpen(false);
-  //   }
-  // };
-
   // Temporary for testing
   console.log('Online users:', onlineUsers);
   console.log('Connected:', isConnected);
+
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+    setVh();
+    window.addEventListener('resize', setVh);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', setVh);
+    }
+    return () => {
+      window.removeEventListener('resize', setVh);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', setVh);
+      }
+    };
+  }, []);
 
   if (!isConnected) {
     return <div>Loading...</div>;

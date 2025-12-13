@@ -70,15 +70,6 @@
       .change_theme_btn {
         @include change_theme_btn;
       }
-      // .btn_log_out {
-      //   width: auto;
-
-      //   @media (max-width: 767px) {
-      //   }
-      //   @media (max-width: 479px) {
-      //     font-size: $font-size-mobile;
-      //   }
-      // }
     }
   }
 
@@ -162,7 +153,6 @@
         flex: 1;
         min-height: 0;
 
-        // border: 2px solid blue;
         width: 100%;
         height: 100%;
 
@@ -175,6 +165,7 @@
           flex-direction: column;
           gap: 10px;
           overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
 
           .message {
             padding: 10px;
@@ -246,15 +237,34 @@
     }
   }
 
+  // ***************************
+  // * MOBILE MEDIA QUERY
+
   @media (max-width: 767px) {
   }
   @media (max-width: 479px) {
+    html,
+    body,
+    #root {
+      height: 100%;
+    }
+
+    body,
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+
     padding-top: env(safe-area-inset-top, 6px);
-    padding-bottom: env(safe-area-inset-bottom, 6px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 8px);
 
     font-size: $font-size-mobile;
 
-    // Mobile desing
+    .messenger_page {
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
     .messenger_container {
       position: relative;
       display: flex;
@@ -263,14 +273,14 @@
       padding: 0;
       // border-radius: 0;
       width: 100%;
-      height: 100%;
+      height: calc(var(--vh, 1vh) * 100);
       margin: 0 auto;
       // box-shadow: none;
 
       .contacts_panel,
       .dialog_panel {
-        position: absolute;
-        // inset: 0;
+        display: flex;
+
         width: 100%;
         height: 100%;
         margin: 0;
@@ -288,6 +298,11 @@
         z-index: 100;
       }
       .dialog_panel {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        background-color: var(--surface-bg);
+
         transform: translateX(100%);
         opacity: 0;
         pointer-events: none;
@@ -299,24 +314,27 @@
           overflow: hidden;
           flex-wrap: nowrap;
 
+          gap: 10px;
           .messeges_history {
             flex: 15;
           }
 
           .action_bar {
+            position: relative;
+
+            bottom: calc(env(safe-area-inset-bottom, 12px) + 8px);
+
+            height: 100%;
+
             display: flex;
             flex-direction: row;
             justify-content: space-around;
             align-self: center;
             overflow: hidden;
-
             flex: 1;
-
-            // padding: 5px 10px;
+            padding: 5px 10px;
             gap: 10px;
-
             width: 100%;
-            height: 100%;
             font-size: $font-size-base-small;
 
             .back_btn {
@@ -337,6 +355,13 @@
         }
       }
 
+      /* Addictional padding for messeges  */
+      // .dialog_panel .messeges_window .messeges_history {
+      //   padding-bottom: calc(56px + env(safe-area-inset-bottom, 12px) + 16px);
+      //   min-height: 0;
+      //   overflow-y: auto;
+      // }
+
       // When chat opened: slide contact away, slide dialog in
       &.chat_open {
         .contacts_panel {
@@ -351,6 +376,12 @@
           pointer-events: auto;
           z-index: 100;
         }
+      }
+
+      .dialog_panel .messeges_window .messeges_history {
+        padding-bottom: calc(56px + env(safe-area-inset-bottom, 12px) + 16px);
+        min-height: 0;
+        overflow-y: auto;
       }
     }
   }

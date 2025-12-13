@@ -1,8 +1,7 @@
 import { Button } from '@components';
 import { useWebSocket } from '@contexts/WebSocketContext';
 import { useAuth } from '@contexts/AuthContext';
-import { useState } from 'react';
-import { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { MdArrowBackIosNew, MdSend } from 'react-icons/md';
 
 export const MessegesWindow = ({ selectedContact, onClose }) => {
