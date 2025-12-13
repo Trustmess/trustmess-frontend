@@ -8,11 +8,14 @@
   flex-direction: column;
   gap: 20px;
   height: 100%;
+  min-height: 100vh;
   padding: 1% 2%;
 
   background-color: var(--page-bg);
   color: var(--text-color);
   font-size: $font-size-base;
+
+  flex-wrap: nowrap;
 
   .nav_line {
     position: static;
@@ -81,6 +84,7 @@
 
   .messenger_container {
     flex: 1;
+    min-height: 0;
     width: 100%;
     gap: 20px;
 
@@ -153,8 +157,10 @@
       .messeges_window {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-self: center;
+        justify-content: flex-start;
+        align-self: stretch;
+        flex: 1;
+        min-height: 0;
 
         // border: 2px solid blue;
         width: 100%;

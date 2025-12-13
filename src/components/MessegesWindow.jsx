@@ -86,10 +86,17 @@ export const MessegesWindow = ({ selectedContact, onClose }) => {
           <MdArrowBackIosNew className='material-icons' />
         </Button>
 
+        {/* Sending message with button click or Enter press */}
         <input
           className='message_input'
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              handleSend();
+            }
+          }}
           placeholder='Enter message'></input>
 
         <Button className={'btn send_message_btn'} onClick={handleSend}>
