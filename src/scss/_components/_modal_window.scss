@@ -59,6 +59,13 @@
       margin-bottom: 16px;
     }
 
+    .actions{
+      gap:20px;
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+    }
+
     .change_theme_btn {
       display: flex;
       align-items: center;
@@ -193,24 +200,106 @@
 // ============================================================================
 // Mobile Responsive
 // ============================================================================
+@media (max-width: 767px) {
+  .modal_window {
+    width: 70%;
+    padding: 20px;
+
+    .modal-title {
+      font-size: $font-size-base-small;
+      margin-bottom: 12px;
+    }
+
+    .modal-body {
+      font-size: $font-size-base-small;
+      gap: 8px;
+
+      .change_theme_btn {
+        width: 45px;
+        height: 45px;
+
+        .theme_ico {
+          font-size: 20px;
+        }
+      }
+
+      .btn_cancel,
+      .btn_account_settings,
+      .btn_log_out {
+        padding: 12px 16px;
+        font-size: $font-size-base-small;
+      }
+
+      .account_settings_component {
+        gap: 8px;
+
+        .btn {
+          width: 60%;
+        }
+
+        .btn_danger {
+          padding: 8px 16px;
+          font-size: $font-size-base-small;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 479px) {
-  .modal-content {
-    width: 95%;
+  .modal_window {
+    width: 90%;
     padding: 16px;
     border-radius: 16px;
 
     .modal-title {
       font-size: $font-size-base-small;
+      margin-bottom: 10px;
     }
 
     .modal-body {
+      .actions{
+        width: 100%;
+        justify-content:space-between;
+        gap:10px;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+      }
       font-size: $font-size-mobile;
-    }
+      gap: 6px;
+      flex-direction: column;
+      width: 100%;
 
-    .btn-outline,
-    .btn-danger {
-      padding: 8px 16px;
-      font-size: $font-size-mobile;
+      .change_theme_btn {
+        width: 40px;
+        height: 40px;
+
+        .theme_ico {
+          font-size: 18px;
+        }
+      }
+
+      .btn_cancel,
+      .btn_account_settings,
+      .btn_log_out {
+        padding: 10px 14px;
+        font-size: $font-size-mobile;
+        width: 100%;
+      }
+
+      .account_settings_component {
+        gap: 6px;
+
+        .btn {
+          width: 100%;
+        }
+
+        .btn_danger {
+          padding: 8px 14px;
+          font-size: $font-size-mobile;
+        }
+      }
     }
   }
 }

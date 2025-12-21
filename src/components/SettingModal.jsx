@@ -44,19 +44,21 @@ export const SettingtModal = ({ isOpen, onRequestClose, username }) => {
       shouldCloseOnOverlayClick={false}>
       {view === 'settings' ? (
         <>
-          {/* Btn Back */}
-          <Button className={'btn change_theme_btn'} onClick={onRequestClose}>
-            <MdArrowBackIosNew className='material-icons' />
-          </Button>
+          <div className='actions'>
+            {/* Btn Back */}
+            <Button className={'btn change_theme_btn'} onClick={onRequestClose}>
+              <MdArrowBackIosNew className='material-icons' />
+            </Button>
 
-          {/* Theme switch */}
-          <Button className={'btn change_theme_btn'} dataTheme={theme} onClick={toggleTheme}>
-            {theme === 'dark' ? (
-              <MdDarkMode className='theme_ico' />
-            ) : (
-              <MdLightMode className='theme_ico' />
-            )}
-          </Button>
+            {/* Theme switch */}
+            <Button className={'btn change_theme_btn'} dataTheme={theme} onClick={toggleTheme}>
+              {theme === 'dark' ? (
+                <MdDarkMode className='theme_ico' />
+              ) : (
+                <MdLightMode className='theme_ico' />
+              )}
+              </Button>
+            </div>
 
           {/* Acount setting */}
           <Button
