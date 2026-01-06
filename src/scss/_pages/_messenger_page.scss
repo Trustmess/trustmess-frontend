@@ -56,6 +56,10 @@
         background: var(--btn-bg);
         color: $button-text-color-light-theme;
       }
+
+      .search_btn {
+        @include change_theme_btn;
+      }
     }
 
     .actions_block {
