@@ -1,0 +1,67 @@
+name: 'Build-to-staging'
+
+on:
+  push:
+    branches:
+      - 'dev'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+        env:
+          VITE_FASTAPI_SERVER: ${{ secrets.VITE_FASTAPI_SERVER }}
+
+      - name: Deploy to staging branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout --orphan staging
+          git reset
+
+          cp dockerfile /tmp/dockerfile
+          cp nginx.conf /tmp/nginx.conf
+          cp .dockerignore /tmp/.dockerignore 2>/staging/null || true
+
+          shopt -s extglob
+          rm -rf !(dist|.git)
+          shopt -u extglob
+
+          cp -r dist/* .
+          rm -rf dist
+
+          cp /tmp/dockerfile .
+          cp /tmp/nginx.conf .
+          cp /tmp/.dockerignore . 2>/staging/null || true
+
+          git add -A
+          git commit -m "Build from main@${{ github.sha }}"
+
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+          git push -u origin staging --force
+
+      - name: Success
+        run: echo "Deployed to staging branch!"
