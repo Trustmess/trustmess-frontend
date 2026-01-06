@@ -66,16 +66,6 @@ export const MessengerPage = () => {
             }}>
             <MdOutlineSettings />
           </Button>
-
-          {/* Log out btn */}
-          {/* <Button
-            className={'btn btn_log_out'}
-            onClick={() => {
-              logout();
-              navigate('/');
-            }}>
-            Log out
-          </Button> */}
         </div>
       </nav>
 
