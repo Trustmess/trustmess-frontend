@@ -5,7 +5,13 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '/src/contexts/AuthContext';
 import { useWebSocket } from '/src/contexts/WebSocketContext';
 // React-icons
-import { MdDarkMode, MdLightMode, MdArrowBackIosNew, MdOutlineSettings } from 'react-icons/md';
+import {
+  MdDarkMode,
+  MdLightMode,
+  MdArrowBackIosNew,
+  MdOutlineSettings,
+  MdSearch,
+} from 'react-icons/md';
 
 // Import SCSS
 import '/src/scss/_pages/_messenger_page.scss';
@@ -54,6 +60,15 @@ export const MessengerPage = () => {
 
           {/* Status indicate */}
           <div className='online_status_div'>{isConnected ? 'Online' : 'Offline'}</div>
+
+          {/* Search BTN */}
+          <Button
+            className={'btn search_btn'}
+            onClick={() => {
+              console.log('Search button clicked');
+            }}>
+            <MdSearch />
+          </Button>
         </div>
 
         {/* actions block */}
